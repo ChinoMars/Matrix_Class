@@ -21,8 +21,10 @@ class Matrix
 		Matrix operator -(const Matrix &);
 		Matrix & operator =(const Matrix &);
 		Matrix operator *(const Matrix &);
-		friend ostream & operator <<(ostream &, const Matrix &);
-		friend istream & operator >>(istream &, Matrix &);
+	    template <typename C>
+		friend ostream &operator << (ostream &, const Matrix<C> &);
+		template <typename C>
+		friend istream &operator >> (istream &, Matrix<C> &);
 		
 	private:
 		unsigned matRow, matCol;
@@ -213,7 +215,7 @@ Matrix<T> Matrix<T>::operator *(const Matrix &mat)
 }
 
 template <typename T>
-ostream & operator <<(ostream &os, const Matrix<T> &mat)
+ostream &operator <<(ostream &os, const Matrix<T> &mat)
 {
 	for(unsigned irow = 0; irow<mat.matRow; ++irow)
 	{
@@ -228,7 +230,7 @@ ostream & operator <<(ostream &os, const Matrix<T> &mat)
 }
 
 template <typename T>
-istream & operator >>(istream &in, const Matrix<T> &mat)
+istream &operator >>(istream &in, Matrix<T> &mat)
 {
 	for(unsigned irow = 0; irow<mat.matRow; ++irow)
 	{
