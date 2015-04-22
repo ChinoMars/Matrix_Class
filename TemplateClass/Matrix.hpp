@@ -66,7 +66,10 @@ Matrix<T>::~Matrix()
 {
 	matRow = 0;
 	matCol = 0;
-	delete [] *matDt;
+	for(unsigned i = 0; i < matRow; ++i)
+	{
+		delete [] matDt[i];
+	}
 	delete [] matDt;
 	
 }
@@ -88,10 +91,9 @@ void Matrix<T>::matDim(unsigned row, unsigned col)
 	matCol = col;
 	
 	matDt = new T* [matRow];
-	T* ptmp = new T [matRow*matCol];
 	for(unsigned i=0; i<matRow; ++i)
 	{
-		matDt[i] = &(ptmp[i*matCol]);
+		matDt[i] = new T [matCol];
 	}
 	
 //	Initialized to Zeros

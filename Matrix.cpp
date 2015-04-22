@@ -27,7 +27,10 @@ Matrix::~Matrix()
 {
 	matRow = 0;
 	matCol = 0;
-	delete [] *matDt;
+	for(unsigned i = 0; i < matRow; ++i)
+	{
+		delete [] matDt[i];
+	}
 	delete [] matDt;
 }
 
@@ -38,10 +41,9 @@ void Matrix::matDim(unsigned row, unsigned col)
 	matCol = col;
 	
 	matDt = new double* [matRow];
-	double* ptmp = new double [matRow*matCol];
-	for(unsigned i=0; i<matRow; ++i)
+	for(unsigned i = 0; i < matRow; ++i)
 	{
-		matDt[i] = &(ptmp[i*matCol]);
+		matDt[i] = new double [matCol];	
 	}
 	
 	for(unsigned i=0; i<matRow; ++i)
